@@ -1,0 +1,33 @@
+h1. Four ways to link a list
+
+In looking at entity systems for flash games, and particularly the projects "Ember":https://github.com/tdavies/Ember and "Xember":https://github.com/alecmce/xember, I was wondering what is the most efficient architecture for the linked lists used by these systems. So I ran some tests.
+
+This project contains those tests.
+
+h3. More info
+
+I wrote a blog post about this, and the results, at "http://www.richardlord.net/blog/linked-list-performance-test":http://www.richardlord.net/blog/linked-list-performance-test.
+
+h3. Developer
+
+* "Richard Lord":http://www.richardlord.net/
+** "Richard on Twitter":http://twitter.com/Richard_Lord
+** "Richard on Github":http://github.com/richardlord
+
+h2. License
+
+Four ways to link a list
+.........................
+
+Author: Richard Lord
+Copyright (c) Richard Lord 2011
+http://www.richardlord.net
+
+
+Licence Agreement
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
