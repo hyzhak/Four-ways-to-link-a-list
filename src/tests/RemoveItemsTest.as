@@ -1,16 +1,19 @@
 package tests
 {
+	import com.gskinner.performance.MethodTest;
+	import com.gskinner.performance.TestSuite;
+	
+	import data.PointDataImpl;
 	import data.PointData;
 	import data.PointDataNode;
 	import data.PointNode;
-
+	
 	import lists.DataExtendsNodeList;
 	import lists.DataIsNodeList;
+	import lists.IData;
 	import lists.NoNodeList;
+	import lists.NodeContainsDataInterfaceList;
 	import lists.NodeContainsDataList;
-
-	import com.gskinner.performance.MethodTest;
-	import com.gskinner.performance.TestSuite;
 
 	public class RemoveItemsTest extends TestSuite
 	{
@@ -19,6 +22,7 @@ package tests
 		private var rawData : Vector.<PointData>;
 		private var rawNode : Vector.<PointNode>;
 		private var rawDataNode : Vector.<PointDataNode>;
+		private var rawVisitData : Vector.<IData>;
 		
 		private var array : Array;
 		private var vector : Vector.<PointData>;
@@ -26,6 +30,8 @@ package tests
 		private var dataIsNodeList : DataIsNodeList;
 		private var nodeContainsDataList : NodeContainsDataList;
 		private var noNodeList : NoNodeList;
+		
+		private var nodeVisitor : NodeContainsDataInterfaceList;
 
 		public function RemoveItemsTest()
 		{
@@ -37,6 +43,7 @@ package tests
 				new MethodTest( testVectorRemove, null, "testVectorRemove", 0, 1, "Vector remove" ), 
 				new MethodTest( testNodeContainsDataListRemove, null, "testNodeContainsDataListRemove", 0, 1, "NodeContainsDataList remove" ), 
 				new MethodTest( testDataExtendsNodeListRemove, null, "testDataExtendsNodeListRemove", 0, 1, "DataExtendsNodeList remove" ), 
+				new MethodTest( testNodeVisitorRemove, null, "testNodeVisitorRemove", 0, 1, "testNodeVisitor remove" ), 
 				new MethodTest( testDataIsNodeListRemove, null, "testDataIsNodeListRemove", 0, 1, "DataIsNodeList remove" ), 
 				new MethodTest( testNoNodeListRemove, null, "testNoNodeListRemove", 0, 1, "NoNodeList remove" ), 
 				];
@@ -48,6 +55,7 @@ package tests
 			rawData = new Vector.<PointData>();
 			rawNode = new Vector.<PointNode>();
 			rawDataNode = new Vector.<PointDataNode>();
+			rawVisitData = new Vector.<IData>();		
 			
 			array = new Array();
 			vector = new Vector.<PointData>();
@@ -55,23 +63,27 @@ package tests
 			dataIsNodeList = new DataIsNodeList();
 			nodeContainsDataList =new NodeContainsDataList();
 			noNodeList = new NoNodeList();
+			nodeVisitor = new NodeContainsDataInterfaceList();
 			
 			for (var i : uint = 0; i < loops; i++)
 			{
 				var pd : PointData = new PointData();
 				var pn : PointNode = new PointNode();
 				var pdn : PointDataNode = new PointDataNode();
-				
+				var p :PointDataImpl = new PointDataImpl() 
 				array.push( pd );
 				vector.push( pd );
 				dataExtendsNodeList.add( pdn );
 				dataIsNodeList.add( pn );
 				nodeContainsDataList.add( pd );
-				noNodeList.add( pd );
+				noNodeList.add( pd );				
+				nodeVisitor.add( p );
 				
 				rawData.push( pd );
 				rawNode.push( pn );
 				rawDataNode.push( pdn );
+				
+				rawVisitData.push( p );
 			}
 			
 			for( i = 0; i < loops; ++i )
@@ -89,6 +101,10 @@ package tests
 				var temp3 : PointDataNode = rawDataNode[pos];
 				rawDataNode[pos] = rawDataNode[i];
 				rawDataNode[i] = temp3;
+				
+				var temp4 : IData = rawVisitData[pos];
+				rawVisitData[pos] = rawVisitData[i];
+				rawVisitData[i] = temp4;
 			}
 		}
 
@@ -134,6 +150,14 @@ package tests
 			for (var i : uint = 0; i < loops; i++)
 			{
 				dataExtendsNodeList.remove( rawDataNode[i] );
+			}
+		}
+
+		public function testNodeVisitorRemove() : void
+		{
+			for (var i : uint = 0; i < loops; i++)
+			{
+				nodeVisitor.remove( rawVisitData[i] );
 			}
 		}
 
