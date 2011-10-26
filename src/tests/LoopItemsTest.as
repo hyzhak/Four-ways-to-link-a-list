@@ -1,17 +1,21 @@
 package tests
 {
+	import com.gskinner.performance.MethodTest;
+	import com.gskinner.performance.TestSuite;
+	
+	import data.PointDataImpl;
+	import data.LoopTestVisitor;
 	import data.PointData;
 	import data.PointDataNode;
 	import data.PointNode;
-
+	
 	import lists.DataExtendsNodeList;
 	import lists.DataIsNodeList;
 	import lists.NoNodeList;
+	import lists.NodeContainsDataInterfaceList;
 	import lists.NodeContainsDataList;
 	import lists.nodes.ListNode;
-
-	import com.gskinner.performance.MethodTest;
-	import com.gskinner.performance.TestSuite;
+	import lists.nodes.ListNodeWithData;
 
 	public class LoopItemsTest extends TestSuite
 	{
@@ -22,6 +26,9 @@ package tests
 		private var dataExtendsNodeList : DataExtendsNodeList;
 		private var dataIsNodeList : DataIsNodeList;
 		private var nodeContainsDataList : NodeContainsDataList;
+		
+		private var nodeVisitor : NodeContainsDataInterfaceList;
+		
 		private var noNodeList : NoNodeList;
 
 		public function LoopItemsTest()
@@ -33,6 +40,7 @@ package tests
 				new MethodTest( testArrayLoop, null, "testArrayLoop", 0, 1, "Array loop" ), 
 				new MethodTest( testVectorLoop, null, "testVectorLoop", 0, 1, "Vector loop" ), 
 				new MethodTest( testNodeContainsDataListLoop, null, "testNodeContainsDataListLoop", 0, 1, "NodeContainsDataList loop" ), 
+				new MethodTest( testVisitor, null, "testVisitor", 0, 1, "testVisitor loop" ), 
 				new MethodTest( testDataExtendsNodeListLoop, null, "testDataExtendsNodeListLoop", 0, 1, "DataExtendsNodeList loop" ), 
 				new MethodTest( testDataIsNodeListLoop, null, "testDataIsNodeListLoop", 0, 1, "DataIsNodeList loop" ), 
 				new MethodTest( testNoNodeListLoop, null, "testNoNodeListLoop", 0, 1, "NoNodeList loop" ), 
@@ -47,6 +55,7 @@ package tests
 			dataExtendsNodeList = new DataExtendsNodeList();
 			dataIsNodeList = new DataIsNodeList();
 			nodeContainsDataList =new NodeContainsDataList();
+			nodeVisitor = new NodeContainsDataInterfaceList();
 			noNodeList = new NoNodeList();
 			
 			for (var i : uint = 0; i < loops; i++)
@@ -55,11 +64,14 @@ package tests
 				var pn : PointNode = new PointNode();
 				var pdn : PointDataNode = new PointDataNode();
 				
+				var epd:PointDataImpl = new PointDataImpl();
+				
 				array.push( pd );
 				vector.push( pd );
 				dataExtendsNodeList.add( pdn );
 				dataIsNodeList.add( pn );
 				nodeContainsDataList.add( pd );
+				nodeVisitor.add( epd );
 				noNodeList.add( pd );
 			}
 		}
@@ -114,6 +126,15 @@ package tests
 			{
 				p = node.data;
 				x = p.x;
+			}
+		}
+		
+		public function testVisitor():void
+		{
+			var visitor:LoopTestVisitor = LoopTestVisitor.getInstance();
+			for ( var node : ListNodeWithData = nodeVisitor.head; node; node = node.next )
+			{
+				node.data.accept(visitor);
 			}
 		}
 
